@@ -1,0 +1,9 @@
+"0","# loading of data from google sheets"
+"0","data <- googlesheets4::read_sheet("
+"0","  'https://docs.google.com/spreadsheets/d/12ack5KRwFCrTVsSKnBWn12y9tVK7GCQ_ieDANxfgQ3Y/edit#gid=0',"
+"0","  skip = 1"
+"0","  )"
+"2","[32m✔[39m Reading from [36mCV[39m.
+"
+"2","[32m✔[39m Range [33m2:10000000[39m.
+"

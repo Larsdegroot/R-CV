@@ -1,0 +1,130 @@
+---
+title: "Lijia Yu's resume"
+author: Lijia Yu
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: false
+# uncomment this line to produce HTML and PDF in RStudio:
+#knit: 
+  #pagedown::chrome_print
+---
+
+```{r, include=FALSE}
+library("dplyr")
+```
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, results="asis")
+```
+
+```{r, include=FALSE}
+data <- googlesheets4::read_sheet(
+  ss="https://docs.google.com/spreadsheets/d/12ack5KRwFCrTVsSKnBWn12y9tVK7GCQ_ieDANxfgQ3Y/edit#gid=0",
+  skip = 1)
+```
+
+```{r, include=FALSE}
+email = "larsdgrt@gmail.com"
+github = "[github.com/Larsdegroot](https://github.com/Larsdegroot)"
+phone_number = "0636395468"
+```
+
+```{r, include=FALSE}
+print_block <- function(data, section_value){
+  
+  # filter dataframe
+  section_data <- data %>% filter(section == section_value)
+  
+  result <- list()
+  # iterrate over each row
+  for (i in 1:nrow(section_data)){
+    # create block
+    block <- glue::glue(
+      "### {section_data[i,]$institution}\n",
+      "\n",
+      "{section_data[i,]$title}\n",
+      "\n",
+      "{section_data[i,]$loc}\n",
+      "\n",
+      "{section_data[i,]$end} - {section_data[1,]$start}\n",
+      "\n",
+      " - {section_data[i,]$description_1}\n",
+      " - {section_data[i,]$description_2}\n",
+      "\n"
+    )
+      
+    # print block
+    print(block)
+  }
+}
+```
+
+Aside
+================================================================================
+
+
+![Lijia Yu](https://avatars1.githubusercontent.com/u/895125?s=400&v=4){width=80%}
+
+
+Contact Info {#contact}
+--------------------------------------------------------------------------------
+```{r}
+glue::glue(
+  '- <i class="fa fa-envelope"></i> {email}\n',
+  '- <i class="fa fa-github"></i> {github}\n',
+  '- <i class="fa fa-phone"></i> {phone_number}\n',
+  '- For more information, please contact me via email.'
+)
+```
+
+Skills {#skills}
+--------------------------------------------------------------------------------
+
+- Experienced in statistical analysis, statistical learning models, and optimization methods.
+
+- Full experience with next generation sequencing data analysis.
+
+- Highly skilled in R, Bash, Perl, Python, LaTeX
+
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+This CV was made with the R find the [**repository here**](https://github.com/rstudio/pagedown).
+
+Last updated on `r Sys.Date()`.
+
+
+
+Main
+================================================================================
+
+Lijia Yu {#title}
+--------------------------------------------------------------------------------
+
+A driven student with a passion for biology and technology. I’m interested in genetics, molecular biology, programming, data science and plants. I collect and grow rare plants as a hobby in a self made greenhouse.
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+print_block(data, "education")
+```
+
+Work Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+print_block(data, "work experience")
+```
+
+Project Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+print_block(data, "project experience")
+```
