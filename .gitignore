@@ -1,5 +1,7 @@
-/.Rproj.user
-/.Rproj.user/*
+.Rproj.user
+.Rproj.user/3A71DBE2/*
+.Rproj.user/3A71DBE2/sources/*
+.Rproj.user/3A71DBE2/sources/prop/*
 .Rhistory
 .RData
 .Ruserdata
