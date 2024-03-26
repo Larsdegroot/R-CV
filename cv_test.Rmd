@@ -1,11 +1,11 @@
 ---
-title: "Lijia Yu's resume"
-author: Lijia Yu
+title: "Lars de Groot's resume"
+author: Lars de Groot
 date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
     # set it to true for a self-contained HTML page but it'll take longer to render
-    self_contained: false
+    self_contained: True
 # uncomment this line to produce HTML and PDF in RStudio:
 #knit: 
   #pagedown::chrome_print
@@ -29,6 +29,7 @@ data <- googlesheets4::read_sheet(
 ```{r, include=FALSE}
 email = "larsdgrt@gmail.com"
 github = "[github.com/Larsdegroot](https://github.com/Larsdegroot)"
+linkedin = "[LinkedIn](https://www.linkedin.com/in/lars-de-groot-596429139)"
 phone_number = "0636395468"
 ```
 
@@ -38,7 +39,9 @@ print_block <- function(data, section_value){
   # filter dataframe
   section_data <- data %>% filter(section == section_value)
   
-  result <- list()
+  # re-order dataframe
+  section_data <- section_data[order(section_data$start),]
+    
   # iterrate over each row
   for (i in 1:nrow(section_data)){
     # create block
@@ -49,7 +52,7 @@ print_block <- function(data, section_value){
       "\n",
       "{section_data[i,]$loc}\n",
       "\n",
-      "{section_data[i,]$end} - {section_data[1,]$start}\n",
+      "{section_data[i,]$start} - {section_data[i,]$end}\n",
       "\n",
       " - {section_data[i,]$description_1}\n",
       " - {section_data[i,]$description_2}\n",
@@ -66,7 +69,7 @@ Aside
 ================================================================================
 
 
-![Lijia Yu](https://avatars1.githubusercontent.com/u/895125?s=400&v=4){width=80%}
+![Lars de Groot]( img/cv_picture_2023.jpeg){width=80%}
 
 
 Contact Info {#contact}
@@ -75,7 +78,7 @@ Contact Info {#contact}
 glue::glue(
   '- <i class="fa fa-envelope"></i> {email}\n',
   '- <i class="fa fa-github"></i> {github}\n',
-  '- <i class="fa fa-phone"></i> {phone_number}\n',
+  '- <i class="fa-brands fa-linkedin"></i> {linkedin}\n',
   '- For more information, please contact me via email.'
 )
 ```
@@ -83,17 +86,46 @@ glue::glue(
 Skills {#skills}
 --------------------------------------------------------------------------------
 
-- Experienced in statistical analysis, statistical learning models, and optimization methods.
+#### Language
 
-- Full experience with next generation sequencing data analysis.
+<style>
+.progress-bar {
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  background-color: #e8e8e8;
+  overflow: hidden;
+}
 
-- Highly skilled in R, Bash, Perl, Python, LaTeX
+.progress-bar__progress {
+  background-color: #444;
+  color: white;
+  padding: 1.5px 12px; 
+  font-weight: bold;
+  font-size: 11px;
+}
+</style>
+
+<div class="progress-bar">
+  <div class="progress-bar__progress" style="width:90%">Dutch</div>
+</div>
+<div class="progress-bar">
+  <div class="progress-bar__progress" style="width:80%">English</div>
+</div>
+
+#### Programming
+
+<div class="progress-bar">
+  <div class="progress-bar__progress" style="width:80%">Python</div>
+</div>
+<div class="progress-bar">
+  <div class="progress-bar__progress" style="width:25%">R</div>
+</div>
 
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-This CV was made with the R find the [**repository here**](https://github.com/rstudio/pagedown).
+This CV was made with R find the [**repository here**](https://github.com/Larsdegroot/R-CV).
 
 Last updated on `r Sys.Date()`.
 
@@ -102,7 +134,7 @@ Last updated on `r Sys.Date()`.
 Main
 ================================================================================
 
-Lijia Yu {#title}
+Lars de Groot {#title}
 --------------------------------------------------------------------------------
 
 A driven student with a passion for biology and technology. I’m interested in genetics, molecular biology, programming, data science and plants. I collect and grow rare plants as a hobby in a self made greenhouse.
@@ -115,6 +147,13 @@ Education {data-icon=graduation-cap data-concise=true}
 print_block(data, "education")
 ```
 
+Extracurricular activities {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+print_block(data, "extracurricular activities")
+```
+
 Work Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
@@ -122,7 +161,7 @@ Work Experience {data-icon=suitcase}
 print_block(data, "work experience")
 ```
 
-Project Experience {data-icon=suitcase}
+Project Experience {data-icon=vial}
 --------------------------------------------------------------------------------
 
 ```{r}
